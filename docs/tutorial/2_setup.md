@@ -43,7 +43,7 @@ cd merlin-vm
 vagrant up
 ```
 
-This will provision a virtual machine, install dependencies for python and singularity, install singularity, create a python virtual environment, and install merlin. 
+This will provision a virtual machine, install dependencies for python and singularity, install singularity, create a python virtual environment, and install merlin. **Note**: You may need to be off VPN for this to work.
 
 Once `vagrant up` has finished running and the command prompt has returned to you, enter the VM via `vagrant ssh` and move to the `/vagrant` directory; this directory is the same as the directory you created on your local system, so data in `/vagrant` will be visible outside the VM. If the VM build was successful, you should see the path for singularity when you run `which singularity`. You should also have a directory called `merlin_venv` inside `/vagrant`:
 
