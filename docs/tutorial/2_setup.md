@@ -2,8 +2,8 @@
 
 !!! info "Prerequisites"
 
-    - A desktop or laptop computer (Windows)
-    - (OPTIONAL) file editor for docker config file editing
+    - A desktop or laptop computer
+    - shell (bash, csh, etc; if running on Windows, use [Git Bash](https://gitforwindows.org/) (part of "git for Windows"))
 
 !!! info "Estimated Time"
 
@@ -23,11 +23,60 @@ This section details the steps necessary to get build a Virtual Machine (VM) whe
 
 First, install VirtualBox using the binary at https://www.virtualbox.org/wiki/Downloads best suited for your system.
 
-Second, install [Vagrant](https://developer.hashicorp.com/vagrant/install)
+Second, install [Vagrant](https://developer.hashicorp.com/vagrant/install).
+
+You can run `which vagrant` to check that vagrant has properly installed and is now part of your path.
 
 ## Building your VM
 
+Create a directory from which to run Vagrant. For example,
+
+```bash
+mkdir merlin-vm
+```
+Download this [Vagrantfile](Vagrantfile) to your new directory. This file must have the name `Vagrantfile`, with no extension such as `.txt`.
+
+Enter the directory that you've created and run `vagrant up`:
+
+```bash
+cd merlin-vm
+vagrant up
+```
+
+This will provision a virtual machine, install dependencies for python and singularity, install singularity, create a python virtual environment, and install merlin. 
+
+Once `vagrant up` has finished running and the command prompt has returned to you, enter the VM via `vagrant ssh` and move to the `/vagrant` directory; this directory is the same as the directory you created on your local system, so data in `/vagrant` will be visible outside the VM. If the VM build was successful, you should see the path for singularity when you run `which singularity`. You should also have a directory called `merlin_venv` inside `/vagrant`:
+
+```bash
+vagrant ssh
+cd /vagrant
+which singularity
+ls
+```
+
+Note that you can exit the virtual machine with `exit` and re-enter with `vagrant ssh`. `vagrant halt` will cause the VM to stop running. After running `vagrant halt`, you can turn the machine back on with `vagrant up`, but the installations and setup done previously will remain completely. `vagrant destroy` will remove the VM from your machine entirely, such that you will need to re-provision the machine (re-build the VM and all software) with `vagrant up` in order to use it again.
+
 ## Activating your Python virtual environment
+
+From within the VM and `/vagrant` directory, you can activate your virtual environment via
+
+```bash
+source merlin_venv/bin/activate
+```
+
+This will add `(merlin)` before the VM's command prompt. Check that merlin has been installed by verifying you see its path after
+
+```bash
+which merlin
+```
+
+This virtual environment and merlin were built for you, but you could create a virtual environment with merlin yourself via
+
+```bash
+python3 -m venv --prompt merlin <new directory>
+source <new directory>/bin/activate
+pip install merlin
+```
 
 ## Configuring Merlin
 
@@ -101,13 +150,13 @@ With this command, the containerized server should now be started. Notice that t
 1. `merlin_server.pf`: A process file containing information regarding the Redis process
 2. `app.yaml`: A new `app.yaml` file configured specifically for the containerized Redis server that we just started
 
-To have Merlin read this configuration, copy it to your current run directory:
+To have Merlin read this configuration, you could copy it to your current run directory:
 
 ```bash
 cp merlin_server/app.yaml .
 ```
 
-You can also make this server container your main server configuration by replacing the one located in your home directory. Make sure you make back-ups of your current `app.yaml` file in case you want to use your previous configurations.
+Alternatively, you could make this server container your main server configuration by replacing the one located in your home directory. Make sure you make back-ups of your current `app.yaml` file in case you want to use your previous configurations.
 
 ```bash
 mv ~/.merlin/app.yaml ~/.merlin/app.yaml.bak
@@ -116,6 +165,8 @@ mv ~/.merlin/app.yaml ~/.merlin/app.yaml.bak
 ```bash
 cp ./merlin_server/app.yaml ~/.merlin/
 ```
+
+This will allow merlin to recognize and read the configuration originally in `merlin_server/app.yaml` even after you change directories. 
 
 !!! note
 
