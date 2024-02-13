@@ -57,7 +57,7 @@ To power on, right click on the machine and scroll to "Start" -> "Normal Start":
 
 <img src="images/7-normal-start.png" width="800">
 
-A GUI will then pop up and will pring logs to stdout as the VM loads:
+A GUI will then pop up and will print logs to stdout as the VM loads:
 
 <img src="images/8-VM-loading.png" width="800">
 
