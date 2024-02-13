@@ -31,47 +31,47 @@ In this section you'll import the `merlin-vm.ova` into VirtualBox and log in.
 
 Open VirtualBox:
 
-<img src="1-open-VirtualBox.png" width="700">
+<img src="images/1-open-VirtualBox.png" width="700">
 
 Go to "File" -> "Import Appliance":
 
-<img src="2-import-appliance.png" width="700">
+<img src="images/2-import-appliance.png" width="700">
 
 Select the `merlin-vm.ova` from the directory where you downloaded it, and then click "Next":
 
-<img src="3-import-merlin-vm.png" width="700">
+<img src="images/3-import-merlin-vm.png" width="700">
 
 On the next screen, uncheck "Import hard drives as VDI", otherwise accept defaults, and select "Finish":
 
-<img src="4-no-VDA.png" width="700">
+<img src="images/4-no-VDA.png" width="700">
 
 On the righthand side of the GUI, a progress bar will show the `merlin-vm.ova` file loading: 
 
-<img src="5-import-progress-bar.png" width="700">
+<img src="images/5-import-progress-bar.png" width="700">
 
 When finished, you will see a machine listed as "Powered off" on the left
 
-<img src="6-import-complete.png" width="700">
+<img src="images/6-import-complete.png" width="700">
 
 To power on, right click on the machine and scroll to "Start" -> "Normal Start":
 
-<img src="7-normal-start.png" width="700">
+<img src="images/7-normal-start.png" width="700">
 
 A GUI will then pop up and will pring logs to stdout as the VM loads:
 
-<img src="8-VM-loading.png" width="700">
+<img src="images/8-VM-loading.png" width="700">
 
 You'll then be presented with a login prompt. Both the username and password of this VM are "vagrant", so you'll type `vagrant` following `ubuntu-focal login:` and `Password:`. Once logged in, you should see the output shown below if you check your working directory and its contents (`pwd`; `ls`) and if you look for the `singularity` binary (`which singularity`):
 
-<img src="9-VB-login.png" width="700">
+<img src="images/9-VB-login.png" width="700">
 
 At this point, you can proceed to the next section to activate your python virtual environment. If you don't like the VirtualBox GUI, you can try logging into the VM from a shell. Open a terminal and at the command prompt, run `ssh -p2222 vagrant@localhost`. As before you'll have to provide `vagrant` as the password. Note that certain environment options (like certain settings in your local `~/.ssh/config`) can prevent this from working:
 
-<img src="10-terminal-login.png" width="700">
+<img src="images/10-terminal-login.png" width="700">
 
 The outputs to e.g. `pwd` and `which singularity` will be the same as shown above:
 
-<img src="11-terminal-verify.png" width="700">
+<img src="images/11-terminal-verify.png" width="700">
 
 ## Activating your Python virtual environment
 
